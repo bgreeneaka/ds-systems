@@ -7,7 +7,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import session.CustomerFacade;
 import session.CustomerFacadeLocal;
 
 public class CustomerServlet extends HttpServlet {
@@ -26,8 +25,6 @@ public class CustomerServlet extends HttpServlet {
         String lastname = request.getParameter("lastname");
         String address = request.getParameter("address");
         String password = request.getParameter("password");
-        
-        
         
         Customer customer = new Customer(customerId, firstname, lastname, address, password);
 

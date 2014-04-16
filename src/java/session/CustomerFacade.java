@@ -30,22 +30,27 @@ public class CustomerFacade extends AbstractFacade<Customer> implements Customer
         super(Customer.class);
     }
 
+    @Override
     public void addCustomer(Customer student) {
         em.persist(student);
     }
 
+    @Override
     public void editStudent(Customer customer) {
         em.merge(customer);
     }
 
+    @Override
     public void deleteCustomer(int customerId) {
         em.remove(getCustomer(customerId));
     }
 
+    @Override
     public Customer getCustomer(int customerId) {
         return em.find(Customer.class, customerId);
     }
 
+    @Override
     public List<Customer> getAllCustomers() {
         return em.createNamedQuery("Customer.findAll").getResultList();
     }

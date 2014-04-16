@@ -32,9 +32,9 @@
                     <td>Address</td>
                     <td><input type="text" name="address" value="${customer.address}" /></td>
                 </tr>
-                
-                    <td>Password</td>
-                    <td><input type="text" name="password" value="${customer.password}" /></td>
+
+                <td>Password</td>
+                <td><input type="text" name="password" value="${customer.password}" /></td>
                 </tr>
                 <tr>
                     <td colspan="2">
@@ -53,13 +53,13 @@
             <th>Last Name</th>
             <th>Address</th>
             <th>Password</th>
-            <c:forEach items="${allCustomers}" var="stud">
+                <c:forEach items="${allCustomers}" var="cust">
                 <tr>
-                    <td>${stud.id}</td>
-                    <td>${stud.firstname}</td>
-                    <td>${stud.lastname}</td>
-                    <td>${stud.address}</td>
-                    <td>${stud.password}</td>
+                    <td>${cust.id}</td>
+                    <td>${cust.firstname}</td>
+                    <td>${cust.lastname}</td>
+                    <td>${cust.address}</td>
+                    <td>${cust.password}</td>
                 </tr>
             </c:forEach>
         </table>  
