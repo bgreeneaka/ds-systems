@@ -14,11 +14,11 @@
     </head>
     <body>
         <h1>Customer Information</h1>
-        <form action="./CustomerServlet" method="post">  
+        <form action="CustomerServlet" method="post">  
             <table>
                 <tr>
                     <td>Customer ID</td>
-                    <td><input type="text" name="customerId" value="${customer.customerId}" /></td>
+                    <td><input type="text" name="id" value="${customer.id}" /></td>
                 </tr>
                 <tr>
                     <td>First Name</td>
@@ -55,7 +55,7 @@
             <th>Password</th>
             <c:forEach items="${allCustomers}" var="stud">
                 <tr>
-                    <td>${stud.customerId}</td>
+                    <td>${stud.id}</td>
                     <td>${stud.firstname}</td>
                     <td>${stud.lastname}</td>
                     <td>${stud.address}</td>

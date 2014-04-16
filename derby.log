@@ -1,7 +1,7 @@
-Tue Apr 15 21:10:14 BST 2014 : Apache Derby Network Server - 10.8.3.0 - (1405108) started and ready to accept connections on port 1527
+Tue Apr 15 22:02:24 BST 2014 : Apache Derby Network Server - 10.8.3.0 - (1405108) started and ready to accept connections on port 1527
 ----------------------------------------------------------------
-Tue Apr 15 21:10:14 BST 2014:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.8.3.0 - (1405108): instance a816c00e-0145-6702-e4c6-ffffc3009ecb 
+Tue Apr 15 22:03:44 BST 2014:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.8.3.0 - (1405108): instance a816c00e-0145-6732-a6f9-ffffc3009ecb 
 on database directory C:\Users\chromodynamics\git\WebShop\WebShop\ShopWebApplication\11042141  with class loader sun.misc.Launcher$AppClassLoader@631d75b9 
 Loaded from file:/C:/Program%20Files/Java/jdk1.7.0_51/db/lib/derby.jar
 java.vendor=Oracle Corporation
@@ -12,3 +12,42 @@ os.arch=amd64
 os.version=6.1
 derby.system.home=C:\Users\chromodynamics\git\WebShop\WebShop\ShopWebApplication
 Database Class Loader started - derby.database.classpath=''
+----------------------------------------------------------------
+Wed Apr 16 14:04:04 BST 2014:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.8.3.0 - (1405108): instance 582f8014-0145-6732-a6f9-ffffc3009ecb 
+on database directory C:\Users\chromodynamics\git\WebShop\WebShop\ShopWebApplication\lab8  with class loader sun.misc.Launcher$AppClassLoader@631d75b9 
+Loaded from file:/C:/Program%20Files/Java/jdk1.7.0_51/db/lib/derby.jar
+java.vendor=Oracle Corporation
+java.runtime.version=1.7.0_51-b13
+user.dir=C:\Program Files\Java\jdk1.7.0_51\db
+os.name=Windows 7
+os.arch=amd64
+os.version=6.1
+derby.system.home=C:\Users\chromodynamics\git\WebShop\WebShop\ShopWebApplication
+Database Class Loader started - derby.database.classpath=''
+----------------------------------------------------------------
+Wed Apr 16 14:04:04 BST 2014:
+Shutting down instance 582f8014-0145-6732-a6f9-ffffc3009ecb on database directory C:\Users\chromodynamics\git\WebShop\WebShop\ShopWebApplication\lab8 with class loader sun.misc.Launcher$AppClassLoader@631d75b9 
+Wed Apr 16 14:04:04 BST 2014 Thread[DRDAConnThread_5,5,main] (DATABASE = lab8), (DRDAID = {778}), Database 'lab8' shutdown.
+----------------------------------------------------------------
+Wed Apr 16 14:04:09 BST 2014:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.8.3.0 - (1405108): instance 4d3680a5-0145-6732-a6f9-ffffc3009ecb 
+on database directory C:\Users\chromodynamics\git\WebShop\WebShop\ShopWebApplication\lab8  with class loader sun.misc.Launcher$AppClassLoader@631d75b9 
+Loaded from file:/C:/Program%20Files/Java/jdk1.7.0_51/db/lib/derby.jar
+java.vendor=Oracle Corporation
+java.runtime.version=1.7.0_51-b13
+user.dir=C:\Program Files\Java\jdk1.7.0_51\db
+os.name=Windows 7
+os.arch=amd64
+os.version=6.1
+derby.system.home=C:\Users\chromodynamics\git\WebShop\WebShop\ShopWebApplication
+Database Class Loader started - derby.database.classpath=''
+----------------------------------------------------------------
+Wed Apr 16 16:08:03 BST 2014: Shutting down Derby engine
+----------------------------------------------------------------
+Wed Apr 16 16:08:03 BST 2014:
+Shutting down instance 4d3680a5-0145-6732-a6f9-ffffc3009ecb on database directory C:\Users\chromodynamics\git\WebShop\WebShop\ShopWebApplication\lab8 with class loader sun.misc.Launcher$AppClassLoader@631d75b9 
+----------------------------------------------------------------
+Wed Apr 16 16:08:03 BST 2014:
+Shutting down instance a816c00e-0145-6732-a6f9-ffffc3009ecb on database directory C:\Users\chromodynamics\git\WebShop\WebShop\ShopWebApplication\11042141 with class loader sun.misc.Launcher$AppClassLoader@631d75b9 
+----------------------------------------------------------------

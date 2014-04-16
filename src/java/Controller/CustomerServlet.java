@@ -8,15 +8,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import session.CustomerFacade;
+import session.CustomerFacadeLocal;
 
 public class CustomerServlet extends HttpServlet {
     @EJB
-    private CustomerFacade customerFacade;
+    private CustomerFacadeLocal customerFacade;
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String action = request.getParameter("action");
-        String customerIdStr = request.getParameter("customerId");
+        String customerIdStr = request.getParameter("id");
         int customerId = 0;
         if (customerIdStr != null && !customerIdStr.equals("")) {
             customerId = Integer.parseInt(customerIdStr);

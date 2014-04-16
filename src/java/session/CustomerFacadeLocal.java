@@ -22,6 +22,16 @@ public interface CustomerFacadeLocal {
     void edit(Customer customer);
 
     void remove(Customer customer);
+    
+    void addCustomer(Customer customer);
+    
+    void deleteCustomer(int customerId);
+    
+    Customer getCustomer(int customerId);
+    
+    void editStudent(Customer customer);
+    
+    List<Customer> getAllCustomers();
 
     Customer find(Object id);
 
