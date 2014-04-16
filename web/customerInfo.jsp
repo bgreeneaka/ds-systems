@@ -32,7 +32,7 @@
                     <td>Address</td>
                     <td><input type="text" name="address" value="${customer.address}" /></td>
                 </tr>
-
+                <tr>
                 <td>Password</td>
                 <td><input type="text" name="password" value="${customer.password}" /></td>
                 </tr>
