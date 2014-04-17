@@ -3,12 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package Controller;
 
+import entity.Product;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.EJB;
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -23,10 +29,8 @@ import session.ShoppingCartLocal;
 public class CheckOut extends HttpServlet {
 
     @EJB
-    ShoppingCartLocal shoppingCart;
-    
-    @EJB
     ProductFacadeLocal productFacade;
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -44,10 +48,24 @@ public class CheckOut extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet CheckOut</title>");            
+            out.println("<title>Servlet CheckOut</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet CheckOut at " + request.getContextPath() + "</h1>");
+
+            ShoppingCartLocal shoppingCart = (ShoppingCartLocal) request.getSession().getAttribute("shoppingCart");
+
+            List<Integer> productIds = shoppingCart.getItems();
+            for (Integer productId : productIds) {
+                Product product = productFacade.getProductById(productId);
+                product.setQuantity(product.getQuantity() - 1);
+                productFacade.editProduct(product);
+            }
+            
+            shoppingCart.removeAllItems();
+
+            out.println(shoppingCart.getItems().size());
+
             out.println("</body>");
             out.println("</html>");
         }
@@ -91,5 +109,4 @@ public class CheckOut extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
 }

@@ -36,7 +36,7 @@ public class CustomerFacade extends AbstractFacade<Customer> implements Customer
     }
 
     @Override
-    public void editStudent(Customer customer) {
+    public void editCustomer(Customer customer) {
         em.merge(customer);
     }
 

@@ -31,7 +31,7 @@ public class CustomerServlet extends HttpServlet {
         if ("Add".equalsIgnoreCase(action)) {
             customerFacade.addCustomer(customer);
         } else if ("Edit".equalsIgnoreCase(action)) {
-            customerFacade.editStudent(customer);
+            customerFacade.editCustomer(customer);
         } else if ("Delete".equalsIgnoreCase(action)) {
             customerFacade.deleteCustomer(customerId);
         } else if ("Search".equalsIgnoreCase(action)) {

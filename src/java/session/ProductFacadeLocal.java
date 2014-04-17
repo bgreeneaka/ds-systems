@@ -32,4 +32,6 @@ public interface ProductFacadeLocal {
     public Product getProductById(int productId);
 
     public Product getProductByName(String name);
+
+    public void editProduct(Product product);
 }

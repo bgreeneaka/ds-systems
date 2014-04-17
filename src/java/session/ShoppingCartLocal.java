@@ -19,5 +19,7 @@ public interface ShoppingCartLocal {
     String addItem(final Integer productId);
 
     List<Integer> getItems();
+
+    public void removeAllItems();
     
 }

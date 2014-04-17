@@ -40,4 +40,9 @@ public class ShoppingCart implements ShoppingCartLocal {
     public List<Integer> getItems() {
         return productIds;
     }
+    
+    @Override
+    public void removeAllItems() {
+        productIds.clear();
+    }
 }

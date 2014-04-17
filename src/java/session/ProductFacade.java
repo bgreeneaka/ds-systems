@@ -37,6 +37,11 @@ public class ProductFacade extends AbstractFacade<Product> implements ProductFac
     }
     
     @Override
+    public void editProduct(Product product) {
+        em.merge(product);
+    }
+    
+    @Override
     public List<Product> getAllProducts() {
         return em.createNamedQuery("Product.findAll").getResultList();
     }

@@ -29,7 +29,7 @@ public interface CustomerFacadeLocal {
     
     Customer getCustomer(int customerId);
     
-    void editStudent(Customer customer);
+    void editCustomer(Customer customer);
     
     List<Customer> getAllCustomers();
 
