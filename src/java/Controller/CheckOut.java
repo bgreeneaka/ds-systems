@@ -9,18 +9,14 @@ import entity.Product;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.ejb.EJB;
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import session.ProductFacadeLocal;
 import session.ShoppingCartLocal;
+import utility.SendJmsMessage;
 
 /**
  *
@@ -45,19 +41,32 @@ public class CheckOut extends HttpServlet {
             out.println("<h1>Checkout Items</h1>");
 
             ShoppingCartLocal shoppingCart = (ShoppingCartLocal) request.getSession().getAttribute("shoppingCart");
+            List<Integer> productIds = null;
 
-            List<Integer> productIds = shoppingCart.getItems();
-            for (Integer productId : productIds) {
-                Product product = productFacade.getProductById(productId);
-                product.setQuantity(product.getQuantity() - 1);
-                productFacade.editProduct(product);
+            if (null != shoppingCart) {
+                productIds = shoppingCart.getItems();
+
+                if (null != productIds) {
+                    for (Integer productId : productIds) {
+                        Product product = productFacade.getProductById(productId);
+                        product.setQuantity(product.getQuantity() - 1);
+                        productFacade.editProduct(product);
+                    }
+
+                    SendJmsMessage messageSender = new SendJmsMessage();
+                    messageSender.sendMessage("User bought products, quantity: " + shoppingCart.getItems().size());
+
+                    shoppingCart.removeAllItems();
+
+                    out.println("Bought items");
+                    out.println("</body>");
+                    out.println("</html>");
+                }
+            } else {
+                out.println("Nothing to buy");
+                out.println("</body>");
+                out.println("</html>");
             }
-            
-            shoppingCart.removeAllItems();
-
-            out.println("Bought items");
-            out.println("</body>");
-            out.println("</html>");
         }
     }
 
