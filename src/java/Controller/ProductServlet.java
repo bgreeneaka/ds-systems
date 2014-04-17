@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import session.ProductFacadeLocal;
+import utility.SendJmsMessage;
 
 public class ProductServlet extends HttpServlet {
 
@@ -29,6 +30,9 @@ public class ProductServlet extends HttpServlet {
 
                 Product product = new Product(productId, name, description, quantity);
                 productFacade.addProduct(product);
+
+                SendJmsMessage messageSender = new SendJmsMessage();
+                messageSender.sendMessage("Added product: " + product.toString());
             } catch (NumberFormatException e) {
             }
 
@@ -36,8 +40,10 @@ public class ProductServlet extends HttpServlet {
             try {
                 int id = Integer.parseInt(request.getParameter("productId"));
                 Product product = productFacade.getProductById(id);
+                
                 int quantity = Integer.parseInt(request.getParameter("quantity"));
                 product.setQuantity(quantity);
+                
                 productFacade.editProduct(product);
             } catch (NumberFormatException e) {
             }
@@ -45,6 +51,11 @@ public class ProductServlet extends HttpServlet {
         } else if ("Delete".equalsIgnoreCase(action)) {
             try {
                 int id = Integer.parseInt(request.getParameter("productId"));
+                Product product = productFacade.getProductById(id);
+
+                SendJmsMessage messageSender = new SendJmsMessage();
+                messageSender.sendMessage("Removed product: " + product.toString());
+
                 productFacade.deleteProduct(id);
             } catch (NumberFormatException e) {
             }
@@ -52,8 +63,10 @@ public class ProductServlet extends HttpServlet {
         } else if ("Search By Id".equalsIgnoreCase(action)) {
             try {
                 List<Product> products = new ArrayList<>();
+                
                 int productId = Integer.parseInt(request.getParameter("productId"));
                 products.add(productFacade.getProductById(productId));
+                
                 request.setAttribute("allProducts", products);
             } catch (NumberFormatException e) {
             }
@@ -61,8 +74,10 @@ public class ProductServlet extends HttpServlet {
         } else if ("Search By Name".equalsIgnoreCase(action)) {
             try {
                 List<Product> products = new ArrayList<>();
+                
                 String name = request.getParameter("name");
                 products.add(productFacade.getProductByName(name));
+                
                 request.setAttribute("allProducts", products);
             } catch (NumberFormatException e) {
             }

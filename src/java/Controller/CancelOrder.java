@@ -27,7 +27,9 @@ public class CancelOrder extends HttpServlet {
             out.println("<title>Cancel Order</title>");
             out.println("</head>");
             out.println("<body>");
+            
             ShoppingCartLocal shoppingCart = (ShoppingCartLocal) request.getSession().getAttribute("shoppingCart");
+            
             if (null != shoppingCart) {
                 shoppingCart.removeAllItems();
                 out.println("Removed shopping cart items");
