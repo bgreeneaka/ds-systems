@@ -41,12 +41,11 @@ public class SelectedItem extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet SelectedItem</title>");
+            out.println("<title></title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet SelectedItem at " + request.getContextPath() + "</h1>");
-            out.println(shoppingCart.addItem(Integer.parseInt(request.getParameter("selectedItem"))));
-            out.println(shoppingCart.getItems().size());
+            out.println(shoppingCart.addItem(Integer.parseInt(request.getParameter("selectedItem"))) 
+                    + " Cart has: " + shoppingCart.getItems().size() + " items");
             request.getSession().setAttribute("shoppingCart", shoppingCart);
             out.println("</body>");
             out.println("</html>");

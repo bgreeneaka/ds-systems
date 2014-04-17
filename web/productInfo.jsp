@@ -40,34 +40,37 @@
                         <input type="submit" name="action" value="Search By Id" />
                         <input type="submit" name="action" value="Search By Name" />
                         <input type="submit" name="action" value="View All Items" />
-                        <form action="ViewShoppingCart" method="post">
-                            <input type="submit" value="View Shopping Cart">
-                        </form>
-                        <form action="CheckOut" method="post">
-                            <input type="submit" value="Check Out">
-                        </form>
                     </td>                
                 </tr>            
             </table>
-        </form>        
+        </form>
+
+        <form action="ViewShoppingCart" method="post">
+            <input type="submit" value="View Shopping Cart">
+        </form>
+
+        <form action="CheckOut" method="post">
+            <input type="submit" value="Check Out">
+        </form>
+
         <br>
         <form action="SelectedItem" method="post">
-        <table border="1">
-            <th>ID</th>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Quantity</th>
-            <th>Select</th>
-                <c:forEach items="${allProducts}" var="prod">
-                <tr>
-                    <td>${prod.productId}</td>
-                    <td>${prod.name}</td>
-                    <td>${prod.description}</td>
-                    <td>${prod.quantity}</td>
-                    <td><input type="submit" name="selectedItem" value="${prod.productId}"
-                </tr>
-            </c:forEach>
-        </table>
+            <table border="1">
+                <th>ID</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Quantity</th>
+                <th>Select</th>
+                    <c:forEach items="${allProducts}" var="prod">
+                    <tr>
+                        <td>${prod.productId}</td>
+                        <td>${prod.name}</td>
+                        <td>${prod.description}</td>
+                        <td>${prod.quantity}</td>
+                        <td><input type="submit" name="selectedItem" value="${prod.productId}"
+                    </tr>
+                </c:forEach>
+            </table>
         </form>
     </body>
 </html>

@@ -48,10 +48,10 @@ public class CheckOut extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet CheckOut</title>");
+            out.println("<title>Checkout Items</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet CheckOut at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Checkout Items</h1>");
 
             ShoppingCartLocal shoppingCart = (ShoppingCartLocal) request.getSession().getAttribute("shoppingCart");
 
@@ -65,7 +65,6 @@ public class CheckOut extends HttpServlet {
             shoppingCart.removeAllItems();
 
             out.println(shoppingCart.getItems().size());
-
             out.println("</body>");
             out.println("</html>");
         }
