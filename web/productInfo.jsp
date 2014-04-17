@@ -18,26 +18,28 @@
             <table>
                 <tr>
                     <td>Product ID</td>
-                    <td><input type="text" name="productId" value="${product.productId}"/></td>
+                    <td><input type="text" name="productId" /></td>
                 </tr>
                 <tr>
                     <td>Product Name</td>
-                    <td><input type="text" name="name" value="${product.name}"/></td>
+                    <td><input type="text" name="name" /></td>
                 </tr>
                 <tr>
                     <td>Description</td>
-                    <td><input type="text" name="description" value="${product.description}"/></td>
+                    <td><input type="text" name="description" /></td>
                 </tr>
                 <tr>
                     <td>Quantity</td>
-                    <td><input type="text" name="quantity" value="${product.quantity}"/></td>
+                    <td><input type="text" name="quantity" /></td>
                 </tr>
                 <tr>
                     <td colspan="2">
                         <input type="submit" name="action" value="Add" />
                         <input type="submit" name="action" value="Edit" />
                         <input type="submit" name="action" value="Delete" />
-                        <input type="submit" name="action" value="Search" />
+                        <input type="submit" name="action" value="Search By Id" />
+                        <input type="submit" name="action" value="Search By Name" />
+                        <input type="submit" name="action" value="View All Items" />
                     </td>                
                 </tr>            
             </table>

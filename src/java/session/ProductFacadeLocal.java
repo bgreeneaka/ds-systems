@@ -30,4 +30,6 @@ public interface ProductFacadeLocal {
     public List<Product> findAll();
 
     public Product getProductById(int productId);
+
+    public Product getProductByName(String name);
 }

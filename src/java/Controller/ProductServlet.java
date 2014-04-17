@@ -1,13 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Controller;
 
 import entity.Product;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -16,10 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import session.ProductFacadeLocal;
 
-/**
- *
- * @author chromodynamics
- */
 public class ProductServlet extends HttpServlet {
 
     @EJB
@@ -29,32 +21,44 @@ public class ProductServlet extends HttpServlet {
             throws ServletException, IOException {
         String action = request.getParameter("action");
 
-        int productId = Integer.parseInt(request.getParameter("productId"));
-        String name = request.getParameter("name");
-        String description = request.getParameter("productId");
-        int quantity = Integer.parseInt(request.getParameter("quantity"));
-
-        Product product = new Product(productId, name, description, quantity);
-
         if ("Add".equalsIgnoreCase(action)) {
-            productFacade.addProduct(product);
+            try {
+                int productId = Integer.parseInt(request.getParameter("productId"));
+                String name = request.getParameter("name");
+                String description = request.getParameter("description");
+                int quantity = Integer.parseInt(request.getParameter("quantity"));
+
+                Product product = new Product(productId, name, description, quantity);
+                productFacade.addProduct(product);
+            } catch (NumberFormatException e) {
+            }
+
         } else if ("Edit".equalsIgnoreCase(action)) {
-            productFacade.edit(product);
+
         } else if ("Delete".equalsIgnoreCase(action)) {
-            productFacade.remove(product);
-        } else if ("Search".equalsIgnoreCase(action)) {
-            product = productFacade.getProductById(productId);
+
+        } else if ("Search By Id".equalsIgnoreCase(action)) {
+            try {
+                List<Product> products = new ArrayList<>();
+                int productId = Integer.parseInt(request.getParameter("productId"));
+                products.add(productFacade.getProductById(productId));
+                request.setAttribute("allProducts", products);
+            } catch (NumberFormatException e) {
+            }
+
+        } else if ("Search By Name".equalsIgnoreCase(action)) {
+             try {
+                List<Product> products = new ArrayList<>();
+                String name = request.getParameter("name");
+                products.add(productFacade.getProductByName(name));
+                request.setAttribute("allProducts", products);
+            } catch (NumberFormatException e) {
+            }
+            
+        } else if ("View All Items".equalsIgnoreCase(action)) {
+            request.setAttribute("allProducts", productFacade.getAllProducts());
         }
-//        
-//        List<Product> products = productFacade.getAllProducts();
-//        
-//        PrintWriter out = response.getWriter();
-//        out.println("<html><body>");
-//        out.println(products.size());
-//        out.println("</body></html>");
-//        
-        request.setAttribute("product", product);
-        request.setAttribute("allProducts", productFacade.getAllProducts());
+
         request.getRequestDispatcher("productInfo.jsp").forward(request, response);
     }
 

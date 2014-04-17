@@ -21,14 +21,14 @@ public class ProductFacade extends AbstractFacade<Product> implements ProductFac
     
     @PersistenceContext(unitName = "ShopWebApplicationPU")
     private EntityManager em;
-
+    
     public ProductFacade() {
         super(Product.class);
     }
-
+    
     @Override
     protected EntityManager getEntityManager() {
-       return em;
+        return em;
     }
     
     @Override
@@ -44,5 +44,10 @@ public class ProductFacade extends AbstractFacade<Product> implements ProductFac
     @Override
     public Product getProductById(int productId) {
         return em.find(Product.class, productId);
+    }
+    
+    @Override
+    public Product getProductByName(String name) {
+        return (Product) em.createNamedQuery("Product.findByName").setParameter("name", name).getSingleResult();
     }
 }
