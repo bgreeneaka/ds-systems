@@ -40,7 +40,9 @@
                         <input type="submit" name="action" value="Search By Id" />
                         <input type="submit" name="action" value="Search By Name" />
                         <input type="submit" name="action" value="View All Items" />
-                        
+                        <form action="ViewShoppingCart" method="post">
+                            <input type="submit" value="View Shopping Cart">
+                        </form>
                     </td>                
                 </tr>            
             </table>

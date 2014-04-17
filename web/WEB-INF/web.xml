@@ -16,6 +16,10 @@
         <servlet-name>CheckOut</servlet-name>
         <servlet-class>Controller.CheckOut</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ViewShoppingCart</servlet-name>
+        <servlet-class>Controller.ViewShoppingCart</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CustomerServlet</servlet-name>
         <url-pattern>/CustomerServlet</url-pattern>
@@ -31,6 +35,10 @@
     <servlet-mapping>
         <servlet-name>CheckOut</servlet-name>
         <url-pattern>/CheckOut</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewShoppingCart</servlet-name>
+        <url-pattern>/ViewShoppingCart</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

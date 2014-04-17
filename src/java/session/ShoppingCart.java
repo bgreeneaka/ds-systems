@@ -5,7 +5,6 @@
  */
 package session;
 
-import entity.Product;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
