@@ -33,8 +33,21 @@ public class ProductServlet extends HttpServlet {
             }
 
         } else if ("Edit".equalsIgnoreCase(action)) {
+            try {
+                int id = Integer.parseInt(request.getParameter("productId"));
+                Product product = productFacade.getProductById(id);
+                int quantity = Integer.parseInt(request.getParameter("quantity"));
+                product.setQuantity(quantity);
+                productFacade.editProduct(product);
+            } catch (NumberFormatException e) {
+            }
 
         } else if ("Delete".equalsIgnoreCase(action)) {
+            try {
+                int id = Integer.parseInt(request.getParameter("productId"));
+                productFacade.deleteProduct(id);
+            } catch (NumberFormatException e) {
+            }
 
         } else if ("Search By Id".equalsIgnoreCase(action)) {
             try {
@@ -46,14 +59,14 @@ public class ProductServlet extends HttpServlet {
             }
 
         } else if ("Search By Name".equalsIgnoreCase(action)) {
-             try {
+            try {
                 List<Product> products = new ArrayList<>();
                 String name = request.getParameter("name");
                 products.add(productFacade.getProductByName(name));
                 request.setAttribute("allProducts", products);
             } catch (NumberFormatException e) {
             }
-            
+
         } else if ("View All Items".equalsIgnoreCase(action)) {
             request.setAttribute("allProducts", productFacade.getAllProducts());
         }

@@ -34,4 +34,6 @@ public interface ProductFacadeLocal {
     public Product getProductByName(String name);
 
     public void editProduct(Product product);
+
+    public void deleteProduct(int productId);
 }

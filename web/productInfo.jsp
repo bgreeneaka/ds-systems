@@ -52,6 +52,10 @@
         <form action="CheckOut" method="post">
             <input type="submit" value="Check Out">
         </form>
+        
+        <form action="CancelOrder" method="post">
+            <input type="submit" value="Cancel Order">
+        </form>
 
         <br>
         <form action="SelectedItem" method="post">
@@ -60,7 +64,7 @@
                 <th>Name</th>
                 <th>Description</th>
                 <th>Quantity</th>
-                <th>Select</th>
+                <th>Purchase</th>
                     <c:forEach items="${allProducts}" var="prod">
                     <tr>
                         <td>${prod.productId}</td>

@@ -55,7 +55,7 @@ public class CheckOut extends HttpServlet {
             
             shoppingCart.removeAllItems();
 
-            out.println(shoppingCart.getItems().size());
+            out.println("Bought items");
             out.println("</body>");
             out.println("</html>");
         }

@@ -12,4 +12,9 @@
     <property name="User" value="nbuser"/>
     <property name="Password" value="nbuser"/>
   </jdbc-connection-pool>
+    <admin-object-resource enabled="true" jndi-name="jms/logs"  res-type="javax.jms.Queue"  res-adapter="jmsra">
+        <property name="Name" value="PhysicalQueue"/>
+    </admin-object-resource>
+    <connector-connection-pool name="jms/logsFactoryPool"  connection-definition-name="javax.jms.QueueConnectionFactory"  resource-adapter-name="jmsra"/>
+    <connector-resource enabled="true" jndi-name="jms/logsFactory" pool-name="jms/logsFactoryPool"  />
 </resources>

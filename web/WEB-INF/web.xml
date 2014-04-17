@@ -24,6 +24,10 @@
         <servlet-name>RemoveShoppingCartItem</servlet-name>
         <servlet-class>Controller.RemoveShoppingCartItem</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CancelOrder</servlet-name>
+        <servlet-class>Controller.CancelOrder</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CustomerServlet</servlet-name>
         <url-pattern>/CustomerServlet</url-pattern>
@@ -47,6 +51,10 @@
     <servlet-mapping>
         <servlet-name>RemoveShoppingCartItem</servlet-name>
         <url-pattern>/RemoveShoppingCartItem</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CancelOrder</servlet-name>
+        <url-pattern>/CancelOrder</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

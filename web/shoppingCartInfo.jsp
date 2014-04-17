@@ -1,9 +1,3 @@
-<%-- 
-    Document   : shoppingCartInfo
-    Created on : 17-Apr-2014, 16:29:07
-    Author     : chromodynamics
---%>
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -14,6 +8,11 @@
     </head>
     <body>
         <h1>Shopping Cart Details</h1>
+
+        ${isItemAdded}
+        <br/>
+        <br/>
+
         <form action="RemoveShoppingCartItem" method="post">
             <table border="1">
                 <th>ID</th>

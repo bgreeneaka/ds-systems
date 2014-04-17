@@ -42,6 +42,11 @@ public class ProductFacade extends AbstractFacade<Product> implements ProductFac
     }
     
     @Override
+    public void deleteProduct(int productId) {
+        em.remove(getProductById(productId));
+    }
+    
+    @Override
     public List<Product> getAllProducts() {
         return em.createNamedQuery("Product.findAll").getResultList();
     }

@@ -6,33 +6,43 @@
 package Controller;
 
 import java.io.IOException;
-import javax.ejb.EJB;
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import session.ProductFacadeLocal;
 import session.ShoppingCartLocal;
+import utility.SendJmsMessage;
 
-public class RemoveShoppingCartItem extends HttpServlet {
-
-    @EJB
-    ProductFacadeLocal productFacade;
+public class CancelOrder extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Cancel Order</title>");
+            out.println("</head>");
+            out.println("<body>");
+            ShoppingCartLocal shoppingCart = (ShoppingCartLocal) request.getSession().getAttribute("shoppingCart");
+            if (null != shoppingCart) {
+                shoppingCart.removeAllItems();
+                out.println("Removed shopping cart items");
+                out.println("</body>");
+                out.println("</html>");
 
-        int removedItem = Integer.parseInt(request.getParameter("removedItem"));
-
-        ShoppingCartLocal shoppingCart = (ShoppingCartLocal) request.getSession().getAttribute("shoppingCart");
-
-        shoppingCart.removeItemById(removedItem);
-        
-        ServletContext context = this.getServletContext();
-        RequestDispatcher dispatcher = context.getRequestDispatcher("/ViewShoppingCart");
-        dispatcher.forward(request, response);
+                SendJmsMessage messageSender = new SendJmsMessage();
+                messageSender.sendMessage("Cancelled Order");
+                
+            } else {
+                out.println("No items to remove");
+                out.println("</body>");
+                out.println("</html>");
+            }
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -73,5 +83,4 @@ public class RemoveShoppingCartItem extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
 }
