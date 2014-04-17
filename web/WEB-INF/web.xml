@@ -12,6 +12,10 @@
         <servlet-name>SelectedItem</servlet-name>
         <servlet-class>Controller.SelectedItem</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CheckOut</servlet-name>
+        <servlet-class>Controller.CheckOut</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CustomerServlet</servlet-name>
         <url-pattern>/CustomerServlet</url-pattern>
@@ -23,6 +27,10 @@
     <servlet-mapping>
         <servlet-name>SelectedItem</servlet-name>
         <url-pattern>/SelectedItem</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CheckOut</servlet-name>
+        <url-pattern>/CheckOut</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

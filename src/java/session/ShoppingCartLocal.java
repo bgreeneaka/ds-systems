@@ -16,7 +16,7 @@ import javax.ejb.Local;
 @Local
 public interface ShoppingCartLocal {
 
-    void addItem(final int productId);
+    String addItem(final Integer productId);
 
     List<Integer> getItems();
     

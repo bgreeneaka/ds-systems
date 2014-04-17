@@ -3,6 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package Controller;
 
 import java.io.IOException;
@@ -12,17 +13,20 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import session.ProductFacadeLocal;
 import session.ShoppingCartLocal;
 
 /**
  *
  * @author chromodynamics
  */
-public class SelectedItem extends HttpServlet {
+public class CheckOut extends HttpServlet {
 
     @EJB
     ShoppingCartLocal shoppingCart;
-
+    
+    @EJB
+    ProductFacadeLocal productFacade;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -34,19 +38,16 @@ public class SelectedItem extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet SelectedItem</title>");
+            out.println("<title>Servlet CheckOut</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet SelectedItem at " + request.getContextPath() + "</h1>");
-            out.println(shoppingCart.addItem(Integer.parseInt(request.getParameter("selectedItem"))));
-            out.println(shoppingCart.getItems().size());
+            out.println("<h1>Servlet CheckOut at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
