@@ -20,6 +20,10 @@
         <servlet-name>ViewShoppingCart</servlet-name>
         <servlet-class>Controller.ViewShoppingCart</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>RemoveShoppingCartItem</servlet-name>
+        <servlet-class>Controller.RemoveShoppingCartItem</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CustomerServlet</servlet-name>
         <url-pattern>/CustomerServlet</url-pattern>
@@ -39,6 +43,10 @@
     <servlet-mapping>
         <servlet-name>ViewShoppingCart</servlet-name>
         <url-pattern>/ViewShoppingCart</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RemoveShoppingCartItem</servlet-name>
+        <url-pattern>/RemoveShoppingCartItem</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -8,13 +8,11 @@ package Controller;
 import entity.Product;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.ejb.EJB;
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -26,39 +24,23 @@ import session.ShoppingCartLocal;
  *
  * @author chromodynamics
  */
-public class CheckOut extends HttpServlet {
+public class RemoveShoppingCartItem extends HttpServlet {
 
     @EJB
     ProductFacadeLocal productFacade;
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Checkout Items</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Checkout Items</h1>");
 
-            ShoppingCartLocal shoppingCart = (ShoppingCartLocal) request.getSession().getAttribute("shoppingCart");
+        int removedItem = Integer.parseInt(request.getParameter("removedItem"));
 
-            List<Integer> productIds = shoppingCart.getItems();
-            for (Integer productId : productIds) {
-                Product product = productFacade.getProductById(productId);
-                product.setQuantity(product.getQuantity() - 1);
-                productFacade.editProduct(product);
-            }
-            
-            shoppingCart.removeAllItems();
+        ShoppingCartLocal shoppingCart = (ShoppingCartLocal) request.getSession().getAttribute("shoppingCart");
 
-            out.println(shoppingCart.getItems().size());
-            out.println("</body>");
-            out.println("</html>");
-        }
+        shoppingCart.removeItemById(removedItem);
+        
+        ServletContext context = this.getServletContext();
+        RequestDispatcher dispatcher = context.getRequestDispatcher("/ViewShoppingCart");
+        dispatcher.forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -99,4 +81,5 @@ public class CheckOut extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
 }

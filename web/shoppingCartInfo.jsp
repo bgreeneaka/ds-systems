@@ -14,7 +14,7 @@
     </head>
     <body>
         <h1>Shopping Cart Details</h1>
-        <form action="RemoveItem" method="post">
+        <form action="RemoveShoppingCartItem" method="post">
             <table border="1">
                 <th>ID</th>
                 <th>Name</th>

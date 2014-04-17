@@ -21,5 +21,7 @@ public interface ShoppingCartLocal {
     List<Integer> getItems();
 
     public void removeAllItems();
+
+    public void removeItemById(int id);
     
 }

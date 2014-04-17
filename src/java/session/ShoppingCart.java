@@ -45,4 +45,14 @@ public class ShoppingCart implements ShoppingCartLocal {
     public void removeAllItems() {
         productIds.clear();
     }
+    
+    @Override
+    public void removeItemById(int id) {
+        for (int i = 0; i < productIds.size(); i++) {
+            if (id == productIds.get(i).intValue()) {
+                productIds.remove(i);
+                break;
+            }
+        }
+    }
 }
