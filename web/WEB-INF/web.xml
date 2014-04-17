@@ -8,6 +8,10 @@
         <servlet-name>ProductServlet</servlet-name>
         <servlet-class>Controller.ProductServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SelectedItem</servlet-name>
+        <servlet-class>Controller.SelectedItem</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CustomerServlet</servlet-name>
         <url-pattern>/CustomerServlet</url-pattern>
@@ -15,6 +19,10 @@
     <servlet-mapping>
         <servlet-name>ProductServlet</servlet-name>
         <url-pattern>/ProductServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SelectedItem</servlet-name>
+        <url-pattern>/SelectedItem</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

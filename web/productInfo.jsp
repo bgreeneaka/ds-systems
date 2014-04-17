@@ -40,24 +40,29 @@
                         <input type="submit" name="action" value="Search By Id" />
                         <input type="submit" name="action" value="Search By Name" />
                         <input type="submit" name="action" value="View All Items" />
+                        
                     </td>                
                 </tr>            
             </table>
         </form>        
         <br>
+        <form action="SelectedItem" method="post">
         <table border="1">
             <th>ID</th>
             <th>Name</th>
             <th>Description</th>
             <th>Quantity</th>
+            <th>Select</th>
                 <c:forEach items="${allProducts}" var="prod">
                 <tr>
                     <td>${prod.productId}</td>
                     <td>${prod.name}</td>
                     <td>${prod.description}</td>
                     <td>${prod.quantity}</td>
+                    <td><input type="submit" name="selectedItem" value="${prod.productId}"
                 </tr>
             </c:forEach>
-        </table>  
+        </table>
+        </form>
     </body>
 </html>
