@@ -34,5 +34,8 @@
         <h1>Hello world</h1>
         <div><a href="customerInfo.jsp">Customers</a></div>
         <div><a href="adminProductInfo.jsp">Products</a></div> 
+        <form action="logoutServlet" method="post">
+                    <input type="submit" value="Logout" >
+                </form>
     </body>
 </html>
