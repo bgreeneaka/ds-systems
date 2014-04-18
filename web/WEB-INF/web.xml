@@ -44,6 +44,10 @@
         <servlet-name>loginServlet</servlet-name>
         <servlet-class>Controller.loginServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UserProductServlet</servlet-name>
+        <servlet-class>Controller.UserProductServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CustomerServlet</servlet-name>
         <url-pattern>/CustomerServlet</url-pattern>
@@ -87,6 +91,10 @@
     <servlet-mapping>
         <servlet-name>loginServlet</servlet-name>
         <url-pattern>/loginServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserProductServlet</servlet-name>
+        <url-pattern>/UserProductServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
