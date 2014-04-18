@@ -58,22 +58,20 @@
         </form>
 
         <br>
-        <form action="SelectedItem" method="post">
+        <form action="ViewProduct" method="post">
             <table border="1">
                 <th>ID</th>
                 <th>Name</th>
                 <th>Description</th>
                 <th>Quantity</th>
-                <th>Purchase</th>
-                <th>Add Comment</th>
-                <th>View Comment</th>
+                <th>View</th>
                     <c:forEach items="${allProducts}" var="prod">
                     <tr>
                         <td>${prod.productId}</td>
                         <td>${prod.name}</td>
                         <td>${prod.description}</td>
                         <td>${prod.quantity}</td>
-                        <td><input type="submit" name="selectedItem" value="${prod.productId}"</td>
+                        <td><input type="submit" name="selectedProduct" value="${prod.productId}"</td>
                     </tr>
                 </c:forEach>
             </table>

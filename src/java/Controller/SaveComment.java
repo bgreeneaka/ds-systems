@@ -1,38 +1,61 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package Controller;
 
+import entity.Comment;
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.ejb.EJB;
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
+import javax.ejb.EJBException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import session.ShoppingCartLocal;
+import session.CommentFacadeLocal;
 
 /**
  *
  * @author chromodynamics
  */
-public class SelectedItem extends HttpServlet {
+public class SaveComment extends HttpServlet {
 
     @EJB
-    ShoppingCartLocal shoppingCart;
+    CommentFacadeLocal commentFacade;
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        ServletContext context = this.getServletContext();
-        RequestDispatcher dispatcher = context.getRequestDispatcher("/ViewShoppingCart");
-        
-        request.setAttribute("isItemAdded", shoppingCart.addItem(
-                Integer.parseInt(request.getParameter("selectedItem"))));
-        request.getSession().setAttribute("shoppingCart", shoppingCart);
+        String commentText = request.getParameter("comment");
+        int productId = Integer.parseInt(request.getParameter("productId"));
 
-        dispatcher.forward(request, response);
+        Comment comment = new Comment("eith", productId, commentText);
+
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Posting Comment</title>");
+            out.println("</head>");
+            out.println("<body>");
+
+            try {
+                commentFacade.addComment(comment);
+                out.println("Comment Added");
+                out.println("</body>");
+                out.println("</html>");
+            } catch (EJBException e) {
+                out.println("You have already added a comment to this product");
+                out.println("</body>");
+                out.println("</html>");
+            }
+        }
     }
-
-// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -70,5 +93,4 @@ public class SelectedItem extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
 }

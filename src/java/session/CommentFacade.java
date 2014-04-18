@@ -38,6 +38,6 @@ public class CommentFacade extends AbstractFacade<Comment> implements CommentFac
     
     @Override
     public List<Comment> getCommentsByProductId(int productId) {
-        return em.createNamedQuery("Comment.findByProductId").setParameter("productId", this).getResultList();
+        return em.createNamedQuery("Comment.findByProductId").setParameter("productId", productId).getResultList();
     }
 }

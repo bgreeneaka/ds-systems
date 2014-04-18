@@ -35,5 +35,7 @@ public class LoggingBean implements MessageListener {
             LOGGER.info(msg);
         } catch (JMSException ex) {
         }
+        
+        
     }
 }

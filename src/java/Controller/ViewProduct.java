@@ -1,38 +1,40 @@
 package Controller;
 
+import entity.Comment;
+import entity.Product;
 import java.io.IOException;
+import java.util.List;
 import javax.ejb.EJB;
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import session.ShoppingCartLocal;
+import session.CommentFacadeLocal;
+import session.ProductFacadeLocal;
 
-/**
- *
- * @author chromodynamics
- */
-public class SelectedItem extends HttpServlet {
+public class ViewProduct extends HttpServlet {
 
     @EJB
-    ShoppingCartLocal shoppingCart;
+    ProductFacadeLocal productFacade;
+
+    @EJB
+    CommentFacadeLocal commentFacade;
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        int selectedProduct = Integer.parseInt(request.getParameter("selectedProduct"));
 
-        ServletContext context = this.getServletContext();
-        RequestDispatcher dispatcher = context.getRequestDispatcher("/ViewShoppingCart");
-        
-        request.setAttribute("isItemAdded", shoppingCart.addItem(
-                Integer.parseInt(request.getParameter("selectedItem"))));
-        request.getSession().setAttribute("shoppingCart", shoppingCart);
+        Product product = productFacade.getProductById(selectedProduct);
 
-        dispatcher.forward(request, response);
+        List<Comment> comments = commentFacade.getCommentsByProductId(selectedProduct);
+
+        request.setAttribute("product", product);
+        request.setAttribute("comments", comments);
+
+        request.getRequestDispatcher("displayProduct.jsp").forward(request, response);
     }
 
-// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *

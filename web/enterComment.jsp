@@ -12,7 +12,12 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
-        
+        <form action="SaveComment" method="post">
+            Enter comment:<br/>
+            <input type="text" name="comment"/>
+            <br/>
+            Submit:
+            <input type="submit" name="productId" value="${productId}"/>
+        </form>
     </body>
 </html>
