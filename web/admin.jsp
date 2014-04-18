@@ -33,6 +33,6 @@
         %>
         <h1>Hello world</h1>
         <div><a href="customerInfo.jsp">Customers</a></div>
-        <div><a href="productInfo.jsp">Products</a></div> 
+        <div><a href="adminProductInfo.jsp">Products</a></div> 
     </body>
 </html>

@@ -33,7 +33,7 @@
             }
         %>
         <h1>Product Information</h1>
-        <form action="ProductServlet" method="post">  
+        <form action="AdminProductServlet" method="post">  
             <table>
                 <tr>
                     <td>Product ID</td>

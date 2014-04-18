@@ -5,8 +5,8 @@
         <servlet-class>Controller.CustomerServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ProductServlet</servlet-name>
-        <servlet-class>Controller.ProductServlet</servlet-class>
+        <servlet-name>AdminProductServlet</servlet-name>
+        <servlet-class>Controller.AdminProductServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>SelectedItem</servlet-name>
@@ -49,8 +49,8 @@
         <url-pattern>/CustomerServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ProductServlet</servlet-name>
-        <url-pattern>/ProductServlet</url-pattern>
+        <servlet-name>AdminProductServlet</servlet-name>
+        <url-pattern>/AdminProductServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>SelectedItem</servlet-name>
