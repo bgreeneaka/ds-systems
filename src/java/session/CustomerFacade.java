@@ -54,4 +54,9 @@ public class CustomerFacade extends AbstractFacade<Customer> implements Customer
     public List<Customer> getAllCustomers() {
         return em.createNamedQuery("Customer.findAll").getResultList();
     }
+    
+    @Override
+    public Customer getCustomerByUsername(String username) {
+        return em.find(Customer.class, username);
+    }
 }

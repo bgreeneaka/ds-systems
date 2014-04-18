@@ -1,8 +1,8 @@
-Wed Apr 16 21:52:18 BST 2014 : Apache Derby Network Server - 10.8.3.0 - (1405108) started and ready to accept connections on port 1527
+Fri Apr 18 17:21:07 BST 2014 : Apache Derby Network Server - 10.8.3.0 - (1405108) started and ready to accept connections on port 1527
 ----------------------------------------------------------------
-Wed Apr 16 21:52:31 BST 2014:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.8.3.0 - (1405108): instance a816c00e-0145-6c4f-c569-ffffc3009ecb 
-on database directory C:\Users\chromodynamics\git\WebShop\WebShop\ShopWebApplication\11042141  with class loader sun.misc.Launcher$AppClassLoader@749cd006 
+Fri Apr 18 17:21:17 BST 2014:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.8.3.0 - (1405108): instance a816c00e-0145-75a4-3618-00004cbb22a4 
+on database directory C:\Users\chromodynamics\Downloads\WebShop (1)\WebShop\WebShop\ShopWebApplication\11042141  with class loader sun.misc.Launcher$AppClassLoader@749cd006 
 Loaded from file:/C:/Program%20Files/Java/jdk1.7.0_51/db/lib/derby.jar
 java.vendor=Oracle Corporation
 java.runtime.version=1.7.0_51-b13
@@ -10,5 +10,5 @@ user.dir=C:\Program Files\Java\jdk1.7.0_51\db
 os.name=Windows 7
 os.arch=amd64
 os.version=6.1
-derby.system.home=C:\Users\chromodynamics\git\WebShop\WebShop\ShopWebApplication
+derby.system.home=C:\Users\chromodynamics\Downloads\WebShop (1)\WebShop\WebShop\ShopWebApplication
 Database Class Loader started - derby.database.classpath=''

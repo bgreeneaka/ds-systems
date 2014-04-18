@@ -12,7 +12,6 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
-
 @Entity
 @Table(name = "CUSTOMER")
 @XmlRootElement
@@ -22,8 +21,10 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Customer.findByFirstname", query = "SELECT c FROM Customer c WHERE c.firstname = :firstname"),
     @NamedQuery(name = "Customer.findByLastname", query = "SELECT c FROM Customer c WHERE c.lastname = :lastname"),
     @NamedQuery(name = "Customer.findByAddress", query = "SELECT c FROM Customer c WHERE c.address = :address"),
+    @NamedQuery(name = "Customer.findByUsername", query = "SELECT c FROM Customer c WHERE c.username = :username"),
     @NamedQuery(name = "Customer.findByPassword", query = "SELECT c FROM Customer c WHERE c.password = :password")})
 public class Customer implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -42,16 +43,27 @@ public class Customer implements Serializable {
     @Size(max = 50)
     @Column(name = "PASSWORD")
     private String password;
+    @Column(name = "USERNAME")
+    private String username;
 
     public Customer() {
     }
 
-    public Customer(int id, String firstname, String lastname, String address, String password) {
+    public Customer(int id, String firstname, String lastname, String address, String password, String username) {
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
         this.address = address;
         this.password = password;
+        this.username = username;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public Integer getId() {
@@ -118,5 +130,5 @@ public class Customer implements Serializable {
     public String toString() {
         return "entity.Customer[ id=" + id + " ]";
     }
-    
+
 }
