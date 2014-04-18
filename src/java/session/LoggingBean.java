@@ -5,8 +5,11 @@
  */
 package session;
 
+import java.io.IOException;
 import java.io.Serializable;
+import java.util.logging.FileHandler;
 import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 import javax.ejb.ActivationConfigProperty;
 import javax.ejb.MessageDriven;
 import javax.jms.JMSException;
@@ -31,11 +34,23 @@ public class LoggingBean implements MessageListener {
             ObjectMessage objectMessage = (ObjectMessage) message;
             Serializable objectData = objectMessage.getObject();
             String msg = (String) objectData;
+
+            FileHandler fh;
+            // %t = C:\Users\[username]\AppData\Local\Temp on windows7
+            fh = new FileHandler("%t/ShopWebApp.log");
+            LOGGER.addHandler(fh);
             
-            LOGGER.info(msg);
-        } catch (JMSException ex) {
+            SimpleFormatter formatter = new SimpleFormatter();
+            fh.setFormatter(formatter);
+            
+             LOGGER.info(msg);
+
+        } catch (SecurityException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JMSException e) {
+            e.printStackTrace();
         }
-        
-        
     }
 }
