@@ -28,6 +28,10 @@
         <servlet-name>CancelOrder</servlet-name>
         <servlet-class>Controller.CancelOrder</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AddComment</servlet-name>
+        <servlet-class>Controller.AddComment</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CustomerServlet</servlet-name>
         <url-pattern>/CustomerServlet</url-pattern>
@@ -55,6 +59,10 @@
     <servlet-mapping>
         <servlet-name>CancelOrder</servlet-name>
         <url-pattern>/CancelOrder</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddComment</servlet-name>
+        <url-pattern>/AddComment</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
