@@ -48,6 +48,9 @@
         <servlet-name>UserProductServlet</servlet-name>
         <servlet-class>Controller.UserProductServlet</servlet-class>
     </servlet>
+        <servlet-name>logoutServlet</servlet-name>
+        <servlet-class>Controller.logoutServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CustomerServlet</servlet-name>
         <url-pattern>/CustomerServlet</url-pattern>
@@ -96,9 +99,36 @@
         <servlet-name>UserProductServlet</servlet-name>
         <url-pattern>/UserProductServlet</url-pattern>
     </servlet-mapping>
+        <servlet-name>logoutServlet</servlet-name>
+        <url-pattern>/logoutServlet</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
         </session-timeout>
     </session-config>
+    <security-constraint>
+        <display-name>adminLogin</display-name>
+        <web-resource-collection>
+            <web-resource-name>adminLogin</web-resource-name>
+            <description>adminLogin</description>
+            <url-pattern>/adminLogin.jsp</url-pattern>
+        </web-resource-collection>
+        <user-data-constraint>
+            <description/>
+            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+        </user-data-constraint>
+    </security-constraint>
+    <security-constraint>
+        <display-name>customerLogin</display-name>
+        <web-resource-collection>
+            <web-resource-name>customerLogin</web-resource-name>
+            <description>customerLogin</description>
+            <url-pattern>/customerLogin.jsp</url-pattern>
+        </web-resource-collection>
+        <user-data-constraint>
+            <description/>
+            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+        </user-data-constraint>
+    </security-constraint>
 </web-app>
