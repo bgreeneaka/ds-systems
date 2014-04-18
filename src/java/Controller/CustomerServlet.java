@@ -25,8 +25,9 @@ public class CustomerServlet extends HttpServlet {
         String lastname = request.getParameter("lastname");
         String address = request.getParameter("address");
         String password = request.getParameter("password");
+        String username = request.getParameter("username");
         
-        Customer customer = new Customer(customerId, firstname, lastname, address, password);
+        Customer customer = new Customer(customerId, firstname, lastname, address, password,username);
 
         if ("Add".equalsIgnoreCase(action)) {
             customerFacade.addCustomer(customer);

@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package session;
 
 import entity.Customer;
@@ -22,11 +21,11 @@ public interface CustomerFacadeLocal {
     void edit(Customer customer);
 
     void remove(Customer customer);
-    
+
     void addCustomer(Customer customer);
-    
+
     void deleteCustomer(int customerId);
-    
+
     Customer getCustomer(int customerId);
     
     void editCustomer(Customer customer);
@@ -39,6 +38,11 @@ public interface CustomerFacadeLocal {
 
     List<Customer> findRange(int[] range);
 
-    int count();
+    public Customer getCustomerByUsername(String username);
+
+        int count
+    
+
+();
     
 }

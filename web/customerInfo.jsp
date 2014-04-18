@@ -13,9 +13,32 @@
         <title>Customer Information</title>
     </head>
     <body>
+          <%
+            //this method checks for a valid session ID
+            String id = null;
+            String user= null;
+            Cookie[] cookies = request.getCookies();    //retrieves cookies
+            if (cookies != null) {
+                for (Cookie cookie : cookies) {
+                    if (cookie.getName().equals("id")) {
+                        id = cookie.getValue();         //retrieves session ID cookie
+                    }
+                    if(cookie.getName().equals("user")){
+                        user = cookie.getValue();
+                    }
+                }
+            }
+            if (id == null) {
+                response.sendRedirect("sessionTimeOut.jsp");        //if session ID cookie is null redirect to session timeout page
+            }
+        %>
         <h1>Customer Information</h1>
         <form action="CustomerServlet" method="post">  
             <table>
+                <tr>
+                <td>User-Name</td>
+                <td><input type="text" name="username" value="${customer.username}" /></td>
+                </tr>
                 <tr>
                     <td>Customer ID</td>
                     <td><input type="text" name="id" value="${customer.id}" /></td>
@@ -49,6 +72,7 @@
         <br>
         <table border="1">
             <th>ID</th>
+            <th>User Name</th>
             <th>First Name</th>
             <th>Last Name</th>
             <th>Address</th>
@@ -56,6 +80,7 @@
                 <c:forEach items="${allCustomers}" var="cust">
                 <tr>
                     <td>${cust.id}</td>
+                    <td>${cust.username}</td>
                     <td>${cust.firstname}</td>
                     <td>${cust.lastname}</td>
                     <td>${cust.address}</td>
