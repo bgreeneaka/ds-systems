@@ -38,7 +38,7 @@ public class AdminProductServlet extends HttpServlet {
             } catch (NumberFormatException e) {
             }
 
-        } else if ("Edit".equalsIgnoreCase(action)) {
+        } else if ("Edit Quantity By Id".equalsIgnoreCase(action)) {
             try {
                 int id = Integer.parseInt(request.getParameter("productId"));
                 Product product = productFacade.getProductById(id);

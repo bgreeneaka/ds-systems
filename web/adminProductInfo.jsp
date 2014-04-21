@@ -54,7 +54,7 @@
                 <tr>
                     <td colspan="2">
                         <input type="submit" name="action" value="Add" />
-                        <input type="submit" name="action" value="Edit" />
+                        <input type="submit" name="action" value="Edit Quantity By Id" />
                         <input type="submit" name="action" value="Delete By Id" />
                         <input type="submit" name="action" value="Search By Id" />
                         <input type="submit" name="action" value="Search By Name" />
