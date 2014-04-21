@@ -9,13 +9,16 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import session.MessagingBeanLocal;
 import session.ProductFacadeLocal;
-import utility.SendJmsMessage;
 
 public class AdminProductServlet extends HttpServlet {
 
     @EJB
     private ProductFacadeLocal productFacade;
+    
+    @EJB
+    private MessagingBeanLocal messageSender;
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -31,7 +34,6 @@ public class AdminProductServlet extends HttpServlet {
                 Product product = new Product(productId, name, description, quantity);
                 productFacade.addProduct(product);
 
-                SendJmsMessage messageSender = new SendJmsMessage();
                 messageSender.sendMessage("Added product: " + product.toString());
             } catch (NumberFormatException e) {
             }
@@ -53,7 +55,6 @@ public class AdminProductServlet extends HttpServlet {
                 int id = Integer.parseInt(request.getParameter("productId"));
                 Product product = productFacade.getProductById(id);
 
-                SendJmsMessage messageSender = new SendJmsMessage();
                 messageSender.sendMessage("Removed product: " + product.toString());
 
                 productFacade.deleteProduct(id);

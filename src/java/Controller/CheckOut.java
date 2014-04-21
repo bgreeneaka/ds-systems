@@ -14,9 +14,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import session.MessagingBeanLocal;
 import session.ProductFacadeLocal;
 import session.ShoppingCartLocal;
-import utility.SendJmsMessage;
 
 /**
  *
@@ -26,12 +26,14 @@ public class CheckOut extends HttpServlet {
 
     @EJB
     ProductFacadeLocal productFacade;
+    
+    @EJB
+    MessagingBeanLocal messageSender;
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
@@ -53,9 +55,7 @@ public class CheckOut extends HttpServlet {
                         productFacade.editProduct(product);
                     }
 
-                    SendJmsMessage messageSender = new SendJmsMessage();
                     messageSender.sendMessage("User bought products, quantity: " + shoppingCart.getItems().size());
-
                     shoppingCart.removeAllItems();
 
                     out.println("Bought items");

@@ -44,7 +44,7 @@ public class LoggingBean implements MessageListener {
             fh.setFormatter(formatter);
             
              LOGGER.info(msg);
-
+             fh.close();
         } catch (SecurityException | IOException | JMSException e) {
             LOGGER.severe(e.toString());
         }

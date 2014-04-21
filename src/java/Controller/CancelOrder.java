@@ -7,14 +7,18 @@ package Controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import session.MessagingBeanLocal;
 import session.ShoppingCartLocal;
-import utility.SendJmsMessage;
 
 public class CancelOrder extends HttpServlet {
+    
+    @EJB
+    MessagingBeanLocal messageSender;
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -36,7 +40,6 @@ public class CancelOrder extends HttpServlet {
                 out.println("</body>");
                 out.println("</html>");
 
-                SendJmsMessage messageSender = new SendJmsMessage();
                 messageSender.sendMessage("Cancelled Order");
                 
             } else {
