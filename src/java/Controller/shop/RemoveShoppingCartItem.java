@@ -1,37 +1,38 @@
-package Controller;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Controller.shop;
 
-import entity.Comment;
-import entity.Product;
 import java.io.IOException;
-import java.util.List;
 import javax.ejb.EJB;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import session.CommentFacadeLocal;
-import session.ProductFacadeLocal;
+import session.shop.ProductFacadeLocal;
+import session.shop.ShoppingCartLocal;
 
-public class ViewProduct extends HttpServlet {
+public class RemoveShoppingCartItem extends HttpServlet {
 
     @EJB
     ProductFacadeLocal productFacade;
 
-    @EJB
-    CommentFacadeLocal commentFacade;
-
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int selectedProduct = Integer.parseInt(request.getParameter("selectedProduct"));
 
-        Product product = productFacade.getProductById(selectedProduct);
+        int removedItem = Integer.parseInt(request.getParameter("removedItem"));
 
-        List<Comment> comments = commentFacade.getCommentsByProductId(selectedProduct);
+        ShoppingCartLocal shoppingCart = (ShoppingCartLocal) request.getSession().getAttribute("shoppingCart");
 
-        request.setAttribute("product", product);
-        request.setAttribute("comments", comments);
-
-        request.getRequestDispatcher("displayProduct.jsp").forward(request, response);
+        shoppingCart.removeItemById(removedItem);
+        
+        ServletContext context = this.getServletContext();
+        RequestDispatcher dispatcher = context.getRequestDispatcher("/ViewShoppingCart");
+        dispatcher.forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -4,10 +4,8 @@
  * and open the template in the editor.
  */
 
-package session;
+package session.logging;
 
-import entity.Comment;
-import java.util.List;
 import javax.ejb.Local;
 
 /**
@@ -15,10 +13,8 @@ import javax.ejb.Local;
  * @author chromodynamics
  */
 @Local
-public interface CommentFacadeLocal {
+public interface MessagingBeanLocal {
 
-    public void addComment(Comment comment);
-
-    public List<Comment> getCommentsByProductId(int productId);
+    void sendMessage(Object msg);
     
 }

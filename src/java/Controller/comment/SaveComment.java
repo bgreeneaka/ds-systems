@@ -3,73 +3,58 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Controller;
+package Controller.comment;
 
-import entity.Product;
+import entity.Comment;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import javax.ejb.EJB;
+import javax.ejb.EJBException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import session.MessagingBeanLocal;
-import session.ProductFacadeLocal;
-import session.ShoppingCartLocal;
+import session.comment.CommentFacadeLocal;
 
 /**
  *
  * @author chromodynamics
  */
-public class CheckOut extends HttpServlet {
+public class SaveComment extends HttpServlet {
 
     @EJB
-    ProductFacadeLocal productFacade;
-    
-    @EJB
-    MessagingBeanLocal messageSender;
+    CommentFacadeLocal commentFacade;
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
+        String commentText = request.getParameter("comment");
+        int productId = Integer.parseInt(request.getParameter("productId"));
+
+        Comment comment = new Comment("eith", productId, commentText);
+
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Checkout Items</title>");
+            out.println("<title>Posting Comment</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Checkout Items</h1>");
 
-            ShoppingCartLocal shoppingCart = (ShoppingCartLocal) request.getSession().getAttribute("shoppingCart");
-            List<Integer> productIds = null;
-
-            if (null != shoppingCart) {
-                productIds = shoppingCart.getItems();
-
-                if (null != productIds) {
-                    for (Integer productId : productIds) {
-                        Product product = productFacade.getProductById(productId);
-                        product.setQuantity(product.getQuantity() - 1);
-                        productFacade.editProduct(product);
-                    }
-
-                    messageSender.sendMessage("User bought products, quantity: " + shoppingCart.getItems().size());
-                    shoppingCart.removeAllItems();
-
-                    out.println("Bought items");
-                    out.println("</body>");
-                    out.println("</html>");
-                }
-            } else {
-                out.println("Nothing to buy");
+            try {
+                commentFacade.addComment(comment);
+                out.println("Comment Added");
+                out.println("</body>");
+                out.println("</html>");
+            } catch (EJBException e) {
+                out.println("You have already added a comment to this product");
                 out.println("</body>");
                 out.println("</html>");
             }
         }
     }
-
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

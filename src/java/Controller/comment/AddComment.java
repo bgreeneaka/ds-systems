@@ -3,52 +3,27 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Controller;
 
-import entity.Product;
+package Controller.comment;
+
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
-import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import session.ProductFacadeLocal;
-import session.ShoppingCartLocal;
 
 /**
  *
  * @author chromodynamics
  */
-public class ViewShoppingCart extends HttpServlet {
-
-    @EJB
-    ProductFacadeLocal productFacade;
+public class AddComment extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        ShoppingCartLocal shoppingCart = (ShoppingCartLocal) request.getSession().getAttribute("shoppingCart");
-
-        List<Integer> productIds = null;
-        List<Product> products = null;
-
-        if (null != shoppingCart) {
-            productIds = shoppingCart.getItems();
-            products = new ArrayList<>();
-        }
-
-        if (null != products) {
-            for (Integer productId : productIds) {
-                Product product = productFacade.getProductById(productId);
-                products.add(product);
-            }
-        }
-
-        request.setAttribute("allProducts", products);
-        request.getRequestDispatcher("shoppingCartInfo.jsp").forward(request, response);
+        
+        request.setAttribute("productId", request.getParameter("productId"));
+        request.getRequestDispatcher("enterComment.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -89,4 +64,5 @@ public class ViewShoppingCart extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
 }

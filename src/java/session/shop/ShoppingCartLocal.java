@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package session;
+package session.shop;
 
 import java.util.List;
 import javax.ejb.Local;

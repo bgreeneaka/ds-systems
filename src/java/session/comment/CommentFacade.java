@@ -4,13 +4,14 @@
  * and open the template in the editor.
  */
 
-package session;
+package session.comment;
 
 import entity.Comment;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import session.AbstractFacade;
 
 /**
  *

@@ -2,55 +2,55 @@
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <servlet>
         <servlet-name>CustomerServlet</servlet-name>
-        <servlet-class>Controller.CustomerServlet</servlet-class>
+        <servlet-class>Controller.user.CustomerServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>AdminProductServlet</servlet-name>
-        <servlet-class>Controller.AdminProductServlet</servlet-class>
+        <servlet-class>Controller.user.AdminProductServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>SelectedItem</servlet-name>
-        <servlet-class>Controller.SelectedItem</servlet-class>
+        <servlet-class>Controller.shop.SelectedItem</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>CheckOut</servlet-name>
-        <servlet-class>Controller.CheckOut</servlet-class>
+        <servlet-class>Controller.shop.CheckOut</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ViewShoppingCart</servlet-name>
-        <servlet-class>Controller.ViewShoppingCart</servlet-class>
+        <servlet-class>Controller.shop.ViewShoppingCart</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>RemoveShoppingCartItem</servlet-name>
-        <servlet-class>Controller.RemoveShoppingCartItem</servlet-class>
+        <servlet-class>Controller.shop.RemoveShoppingCartItem</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>CancelOrder</servlet-name>
-        <servlet-class>Controller.CancelOrder</servlet-class>
+        <servlet-class>Controller.shop.CancelOrder</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>AddComment</servlet-name>
-        <servlet-class>Controller.AddComment</servlet-class>
+        <servlet-class>Controller.comment.AddComment</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ViewProduct</servlet-name>
-        <servlet-class>Controller.ViewProduct</servlet-class>
+        <servlet-class>Controller.shop.ViewProduct</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>SaveComment</servlet-name>
-        <servlet-class>Controller.SaveComment</servlet-class>
+        <servlet-class>Controller.comment.SaveComment</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>loginServlet</servlet-name>
-        <servlet-class>Controller.loginServlet</servlet-class>
+        <servlet-class>Controller.auth.loginServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>UserProductServlet</servlet-name>
-        <servlet-class>Controller.UserProductServlet</servlet-class>
+        <servlet-class>Controller.user.UserProductServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>logoutServlet</servlet-name>
-        <servlet-class>Controller.logoutServlet</servlet-class>
+        <servlet-class>Controller.auth.logoutServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>CustomerServlet</servlet-name>

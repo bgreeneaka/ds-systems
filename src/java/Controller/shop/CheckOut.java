@@ -3,19 +3,29 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Controller;
+package Controller.shop;
 
+import entity.Product;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import session.MessagingBeanLocal;
-import session.ShoppingCartLocal;
+import session.logging.MessagingBeanLocal;
+import session.shop.ProductFacadeLocal;
+import session.shop.ShoppingCartLocal;
 
-public class CancelOrder extends HttpServlet {
+/**
+ *
+ * @author chromodynamics
+ */
+public class CheckOut extends HttpServlet {
+
+    @EJB
+    ProductFacadeLocal productFacade;
     
     @EJB
     MessagingBeanLocal messageSender;
@@ -24,26 +34,36 @@ public class CancelOrder extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Cancel Order</title>");
+            out.println("<title>Checkout Items</title>");
             out.println("</head>");
             out.println("<body>");
-            
-            ShoppingCartLocal shoppingCart = (ShoppingCartLocal) request.getSession().getAttribute("shoppingCart");
-            
-            if (null != shoppingCart) {
-                shoppingCart.removeAllItems();
-                out.println("Removed shopping cart items");
-                out.println("</body>");
-                out.println("</html>");
+            out.println("<h1>Checkout Items</h1>");
 
-                messageSender.sendMessage("Cancelled Order");
-                
+            ShoppingCartLocal shoppingCart = (ShoppingCartLocal) request.getSession().getAttribute("shoppingCart");
+            List<Integer> productIds = null;
+
+            if (null != shoppingCart) {
+                productIds = shoppingCart.getItems();
+
+                if (null != productIds) {
+                    for (Integer productId : productIds) {
+                        Product product = productFacade.getProductById(productId);
+                        product.setQuantity(product.getQuantity() - 1);
+                        productFacade.editProduct(product);
+                    }
+
+                    messageSender.sendMessage("User bought products, quantity: " + shoppingCart.getItems().size());
+                    shoppingCart.removeAllItems();
+
+                    out.println("Bought items");
+                    out.println("</body>");
+                    out.println("</html>");
+                }
             } else {
-                out.println("No items to remove");
+                out.println("Nothing to buy");
                 out.println("</body>");
                 out.println("</html>");
             }

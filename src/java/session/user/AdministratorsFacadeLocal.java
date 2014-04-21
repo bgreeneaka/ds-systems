@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package session;
+package session.user;
 
 import entity.Administrators;
 import java.util.List;

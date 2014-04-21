@@ -1,67 +1,27 @@
-package Controller;
+package Controller.user;
 
 import entity.Product;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
+import javax.ejb.EJBException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import session.MessagingBeanLocal;
-import session.ProductFacadeLocal;
+import session.shop.ProductFacadeLocal;
 
-public class AdminProductServlet extends HttpServlet {
+public class UserProductServlet extends HttpServlet {
 
     @EJB
     private ProductFacadeLocal productFacade;
-    
-    @EJB
-    private MessagingBeanLocal messageSender;
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String action = request.getParameter("action");
 
-        if ("Add".equalsIgnoreCase(action)) {
-            try {
-                int productId = Integer.parseInt(request.getParameter("productId"));
-                String name = request.getParameter("name");
-                String description = request.getParameter("description");
-                int quantity = Integer.parseInt(request.getParameter("quantity"));
-
-                Product product = new Product(productId, name, description, quantity);
-                productFacade.addProduct(product);
-
-                messageSender.sendMessage("Added product: " + product.toString());
-            } catch (NumberFormatException e) {
-            }
-
-        } else if ("Edit".equalsIgnoreCase(action)) {
-            try {
-                int id = Integer.parseInt(request.getParameter("productId"));
-                Product product = productFacade.getProductById(id);
-                
-                int quantity = Integer.parseInt(request.getParameter("quantity"));
-                product.setQuantity(quantity);
-                
-                productFacade.editProduct(product);
-            } catch (NumberFormatException e) {
-            }
-
-        } else if ("Delete By Id".equalsIgnoreCase(action)) {
-            try {
-                int id = Integer.parseInt(request.getParameter("productId"));
-                Product product = productFacade.getProductById(id);
-
-                messageSender.sendMessage("Removed product: " + product.toString());
-
-                productFacade.deleteProduct(id);
-            } catch (NumberFormatException e) {
-            }
-
-        } else if ("Search By Id".equalsIgnoreCase(action)) {
+        if ("Search By Id".equalsIgnoreCase(action)) {
             try {
                 List<Product> products = new ArrayList<>();
                 
@@ -80,14 +40,14 @@ public class AdminProductServlet extends HttpServlet {
                 products.add(productFacade.getProductByName(name));
                 
                 request.setAttribute("allProducts", products);
-            } catch (NumberFormatException e) {
+            } catch (NumberFormatException | EJBException e) {
             }
 
         } else if ("View All Items".equalsIgnoreCase(action)) {
             request.setAttribute("allProducts", productFacade.getAllProducts());
         }
 
-        request.getRequestDispatcher("adminProductInfo.jsp").forward(request, response);
+        request.getRequestDispatcher("userProductInfo.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

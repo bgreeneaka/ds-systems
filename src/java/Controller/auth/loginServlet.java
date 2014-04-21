@@ -1,4 +1,4 @@
-package Controller;
+package Controller.auth;
 
 import entity.Administrators;
 import entity.Customer;
@@ -10,8 +10,8 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import session.AdministratorsFacadeLocal;
-import session.CustomerFacadeLocal;
+import session.user.AdministratorsFacadeLocal;
+import session.user.CustomerFacadeLocal;
 
 /**
  *
@@ -23,7 +23,7 @@ public class loginServlet extends HttpServlet {
     private AdministratorsFacadeLocal adminFacade;
     @EJB
     private CustomerFacadeLocal customerFacade;
-    private SessionId sessionId = new SessionId();
+    private final SessionId sessionId = new SessionId();
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

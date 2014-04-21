@@ -3,20 +3,26 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Controller;
+package Controller.shop;
 
+import entity.Product;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 import javax.ejb.EJB;
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import session.ProductFacadeLocal;
-import session.ShoppingCartLocal;
+import session.shop.ProductFacadeLocal;
+import session.shop.ShoppingCartLocal;
 
-public class RemoveShoppingCartItem extends HttpServlet {
+/**
+ *
+ * @author chromodynamics
+ */
+public class ViewShoppingCart extends HttpServlet {
 
     @EJB
     ProductFacadeLocal productFacade;
@@ -24,15 +30,25 @@ public class RemoveShoppingCartItem extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        int removedItem = Integer.parseInt(request.getParameter("removedItem"));
-
         ShoppingCartLocal shoppingCart = (ShoppingCartLocal) request.getSession().getAttribute("shoppingCart");
 
-        shoppingCart.removeItemById(removedItem);
-        
-        ServletContext context = this.getServletContext();
-        RequestDispatcher dispatcher = context.getRequestDispatcher("/ViewShoppingCart");
-        dispatcher.forward(request, response);
+        List<Integer> productIds = null;
+        List<Product> products = null;
+
+        if (null != shoppingCart) {
+            productIds = shoppingCart.getItems();
+            products = new ArrayList<>();
+        }
+
+        if (null != products) {
+            for (Integer productId : productIds) {
+                Product product = productFacade.getProductById(productId);
+                products.add(product);
+            }
+        }
+
+        request.setAttribute("allProducts", products);
+        request.getRequestDispatcher("shoppingCartInfo.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -73,5 +89,4 @@ public class RemoveShoppingCartItem extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
 }
