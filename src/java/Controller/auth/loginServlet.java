@@ -51,7 +51,6 @@ public class loginServlet extends HttpServlet {
                     response.addCookie(sessionIDCookie);
                     response.sendRedirect("admin.jsp");
                 }
-
             }
         } else if (action.equals("customer")) {
             List<Customer> customerList = customerFacade.getAllCustomers();
@@ -64,9 +63,7 @@ public class loginServlet extends HttpServlet {
                     response.addCookie(userNameCookie);
                     response.addCookie(sessionIDCookie);
                     response.sendRedirect("userProductInfo.jsp");
-
                 }
-
             }
         }
     }

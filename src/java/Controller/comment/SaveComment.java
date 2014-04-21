@@ -11,6 +11,7 @@ import java.io.PrintWriter;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -28,10 +29,20 @@ public class SaveComment extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        String user = "";
+        Cookie[] cookies = request.getCookies();    //retrieves cookies
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("user")) {
+                    user = cookie.getValue();
+                }
+            }
+        }
+
         String commentText = request.getParameter("comment");
         int productId = Integer.parseInt(request.getParameter("productId"));
 
-        Comment comment = new Comment("eith", productId, commentText);
+        Comment comment = new Comment(user, productId, commentText);
 
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
@@ -49,7 +60,7 @@ public class SaveComment extends HttpServlet {
                 out.println("</body>");
                 out.println("</html>");
             } catch (EJBException e) {
-                out.println("You have already added a comment to this product");
+                out.println("Error in processing comment");
                 out.println("</body>");
                 out.println("</html>");
             }
