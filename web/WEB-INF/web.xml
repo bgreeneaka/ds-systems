@@ -48,6 +48,7 @@
         <servlet-name>UserProductServlet</servlet-name>
         <servlet-class>Controller.UserProductServlet</servlet-class>
     </servlet>
+    <servlet>
         <servlet-name>logoutServlet</servlet-name>
         <servlet-class>Controller.logoutServlet</servlet-class>
     </servlet>
@@ -99,6 +100,7 @@
         <servlet-name>UserProductServlet</servlet-name>
         <url-pattern>/UserProductServlet</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>logoutServlet</servlet-name>
         <url-pattern>/logoutServlet</url-pattern>
     </servlet-mapping>
