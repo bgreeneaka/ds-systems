@@ -45,12 +45,8 @@ public class LoggingBean implements MessageListener {
             
              LOGGER.info(msg);
 
-        } catch (SecurityException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (JMSException e) {
-            e.printStackTrace();
+        } catch (SecurityException | IOException | JMSException e) {
+            LOGGER.severe(e.toString());
         }
     }
 }

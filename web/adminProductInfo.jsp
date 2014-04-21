@@ -67,11 +67,7 @@
         <form action="ViewShoppingCart" method="post">
             <input type="submit" value="View Shopping Cart">
         </form>
-
-        <form action="CheckOut" method="post">
-            <input type="submit" value="Check Out">
-        </form>
-
+        
         <form action="CancelOrder" method="post">
             <input type="submit" value="Cancel Order">
         </form>
