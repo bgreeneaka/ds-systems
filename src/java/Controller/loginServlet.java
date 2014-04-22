@@ -3,13 +3,16 @@ package Controller;
 import entity.Administrators;
 import entity.Customer;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 import javax.ejb.EJB;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.owasp.esapi.ESAPI;
 import session.AdministratorsFacadeLocal;
 import session.CustomerFacadeLocal;
 
@@ -48,45 +51,78 @@ public class loginServlet extends HttpServlet {
 //
 //    }
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String userName = request.getParameter("username");
+        String sessionID = sessionId.newSessionId(request.getParameter("username"));   // gets username parameter and encrypts it and uses it as a session ID
+        String userName = ESAPI.encoder().encodeForHTMLAttribute(request.getParameter("username"));
+        String safeUserName = ESAPI.encoder().encodeForHTMLAttribute(request.getParameter("username"));
+        String safeUserNameDecoded = ESAPI.encoder().decodeForHTML(request.getParameter("username"));
+
         String password = request.getParameter("password");
         String action = request.getParameter("action");
-        String sessionID = sessionId.newSessionId(userName);   // gets username parameter and encrypts it and uses it as a session ID
-
+        
+ 
         if (action.equals("admin")) {
 
             List<Administrators> adminList = adminFacade.getAllAdmins();
             for (Administrators admin : adminList) {
-                if (admin.getUsername().equals(userName) && admin.getPassword().equals(password)) {
+                if (admin.getUsername().equals(ESAPI.encoder().decodeForHTML(userName)) && admin.getPassword().equals(password)) {
 
                     Cookie userNameCookie = new Cookie("user", userName);
                     Cookie sessionIDCookie = new Cookie("id", sessionID);
+                    Cookie encodedName = new Cookie("safeName", safeUserName);
+                    Cookie decodedName = new Cookie("safeUserNameDecoded", safeUserNameDecoded);
+                    decodedName.setMaxAge(60 * 10);
+                    decodedName.setSecure(true);
+                    response.addCookie(decodedName);
+                    encodedName.setMaxAge(60 * 10);
+                    encodedName.setSecure(true);
+                    response.addCookie(encodedName);
                     userNameCookie.setMaxAge(60 * 10);
                     sessionIDCookie.setMaxAge(60 * 10);
+                    sessionIDCookie.setSecure(true);
+                    userNameCookie.setSecure(true);
                     response.addCookie(userNameCookie);
                     response.addCookie(sessionIDCookie);
                     response.sendRedirect("admin.jsp");
+                } else {
+                    RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.html");
+                    PrintWriter out = response.getWriter();
+                    out.println("<font color=red>Either user name or password is wrong.</font>");
+                    rd.include(request, response);
                 }
 
             }
         } else if (action.equals("customer")) {
             List<Customer> customerList = customerFacade.getAllCustomers();
             for (Customer customer : customerList) {
-                if (customer.getUsername().equals(userName) && customer.getPassword().equals(password)) {
+                if (customer.getUsername().equals(ESAPI.encoder().decodeForHTML(userName)) && customer.getPassword().equals(password)) {
                     Cookie userNameCookie = new Cookie("user", userName);
                     Cookie sessionIDCookie = new Cookie("id", sessionID);
+                    Cookie encodedName = new Cookie("safeName", safeUserName);
+                    Cookie decodedName = new Cookie("safeUserNameDecoded", safeUserNameDecoded);
+                    decodedName.setMaxAge(60 * 10);
+                    decodedName.setSecure(true);
+                    response.addCookie(decodedName);
+                    encodedName.setMaxAge(60 * 10);
+                    encodedName.setSecure(true);
+                    response.addCookie(encodedName);
                     userNameCookie.setMaxAge(60 * 10);
                     sessionIDCookie.setMaxAge(60 * 10);
                     response.addCookie(userNameCookie);
                     response.addCookie(sessionIDCookie);
                     response.sendRedirect("shop.jsp");
-
+                    sessionIDCookie.setSecure(true);
+                    userNameCookie.setSecure(true);
+                } else {
+                    RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.html");
+                    PrintWriter out = response.getWriter();
+                    out.println("<font color=red>Either user name or password is wrong.</font>");
+                    rd.include(request, response);
                 }
 
             }
-        }
+        } 
     }
 
     @Override
