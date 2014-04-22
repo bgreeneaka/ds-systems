@@ -14,6 +14,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.owasp.esapi.ESAPI;
 import session.CommentFacadeLocal;
 
 /**
@@ -28,9 +29,9 @@ public class SaveComment extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String commentText = request.getParameter("comment");
+        String commentText = ESAPI.encoder().encodeForHTMLAttribute(request.getParameter("comment"));
         int productId = Integer.parseInt(request.getParameter("productId"));
-
+ 
         Comment comment = new Comment("eith", productId, commentText);
 
         response.setContentType("text/html;charset=UTF-8");
