@@ -56,12 +56,11 @@ public class loginServlet extends HttpServlet {
         String sessionID = sessionId.newSessionId(request.getParameter("username"));   // gets username parameter and encrypts it and uses it as a session ID
         String userName = ESAPI.encoder().encodeForHTMLAttribute(request.getParameter("username"));
         String safeUserName = ESAPI.encoder().encodeForHTMLAttribute(request.getParameter("username"));
-        String safeUserNameDecoded = ESAPI.encoder().decodeForHTML(request.getParameter("username"));
+        // String safeUserNameDecoded = ESAPI.encoder().decodeForHTML(request.getParameter("username"));
 
         String password = request.getParameter("password");
         String action = request.getParameter("action");
-        
- 
+
         if (action.equals("admin")) {
 
             List<Administrators> adminList = adminFacade.getAllAdmins();
@@ -71,10 +70,6 @@ public class loginServlet extends HttpServlet {
                     Cookie userNameCookie = new Cookie("user", userName);
                     Cookie sessionIDCookie = new Cookie("id", sessionID);
                     Cookie encodedName = new Cookie("safeName", safeUserName);
-                    Cookie decodedName = new Cookie("safeUserNameDecoded", safeUserNameDecoded);
-                    decodedName.setMaxAge(60 * 10);
-                    decodedName.setSecure(true);
-                    response.addCookie(decodedName);
                     encodedName.setMaxAge(60 * 10);
                     encodedName.setSecure(true);
                     response.addCookie(encodedName);
@@ -91,7 +86,7 @@ public class loginServlet extends HttpServlet {
                     out.println("<font color=red>Either user name or password is wrong.</font>");
                     rd.include(request, response);
                 }
-
+  
             }
         } else if (action.equals("customer")) {
             List<Customer> customerList = customerFacade.getAllCustomers();
@@ -100,10 +95,6 @@ public class loginServlet extends HttpServlet {
                     Cookie userNameCookie = new Cookie("user", userName);
                     Cookie sessionIDCookie = new Cookie("id", sessionID);
                     Cookie encodedName = new Cookie("safeName", safeUserName);
-                    Cookie decodedName = new Cookie("safeUserNameDecoded", safeUserNameDecoded);
-                    decodedName.setMaxAge(60 * 10);
-                    decodedName.setSecure(true);
-                    response.addCookie(decodedName);
                     encodedName.setMaxAge(60 * 10);
                     encodedName.setSecure(true);
                     response.addCookie(encodedName);
@@ -122,7 +113,7 @@ public class loginServlet extends HttpServlet {
                 }
 
             }
-        } 
+        }
     }
 
     @Override
