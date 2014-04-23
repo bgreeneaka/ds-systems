@@ -31,7 +31,7 @@ public class CheckOut extends HttpServlet {
     @EJB
     MessagingBeanLocal messageSender;
 
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
         //this method checks for a valid session ID
@@ -46,7 +46,7 @@ public class CheckOut extends HttpServlet {
             }
         }
         if (id == null || !id.equals(request.getSession().getAttribute("sessionId"))) {
-              request.getRequestDispatcher("sessionTimeOut.jsp").forward(request, response);
+            request.getRequestDispatcher("sessionTimeOut.jsp").forward(request, response);
         }
 
         response.setContentType("text/html;charset=UTF-8");
@@ -62,23 +62,30 @@ public class CheckOut extends HttpServlet {
             ShoppingCartLocal shoppingCart = (ShoppingCartLocal) request.getSession().getAttribute("shoppingCart");
             List<Integer> productIds = null;
 
-            if (null != shoppingCart) {
+            if (null != shoppingCart && !shoppingCart.getItems().isEmpty()) {
                 productIds = shoppingCart.getItems();
 
-                if (null != productIds) {
-                    for (Integer productId : productIds) {
-                        Product product = productFacade.getProductById(productId);
-                        product.setQuantity(product.getQuantity() - 1);
-                        productFacade.editProduct(product);
-                    }
-
-                    messageSender.sendMessage("User bought products, quantity: " + shoppingCart.getItems().size());
-                    shoppingCart.removeAllItems();
-
-                    out.println("Bought items");
-                    out.println("</body>");
-                    out.println("</html>");
+                for (Integer productId : productIds) {
+                    Product product = productFacade.getProductById(productId);
+                    product.setQuantity(product.getQuantity() - 1);
+                    productFacade.editProduct(product);
                 }
+
+                String user = "";
+
+                for (Cookie cookie : cookies) {
+                    if (cookie.getName().equals("safeName")) {
+                        user = cookie.getValue();
+                    }
+                }
+
+                messageSender.sendMessage("User " + user + " bought products, quantity: " + shoppingCart.getItems().size());
+                shoppingCart.removeAllItems();
+
+                out.println("Bought items");
+                out.println("</body>");
+                out.println("</html>");
+
             } else {
                 out.println("Nothing to buy");
                 out.println("</body>");
@@ -86,43 +93,4 @@ public class CheckOut extends HttpServlet {
             }
         }
     }
-
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
-
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
 }

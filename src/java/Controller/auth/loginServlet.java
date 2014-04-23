@@ -28,12 +28,8 @@ public class loginServlet extends HttpServlet {
     private CustomerFacadeLocal customerFacade;
     private final SessionId sessionId = new SessionId();
 
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-    }
-
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String sessionID = sessionId.newSessionId(request.getParameter("username"));   // gets username parameter and encrypts it and uses it as a session ID
         String userName = ESAPI.encoder().encodeForHTMLAttribute(request.getParameter("username"));
@@ -57,15 +53,14 @@ public class loginServlet extends HttpServlet {
                     response.addCookie(encodedName);
 
                     userNameCookie.setMaxAge(60 * 10);
-                    sessionIDCookie.setMaxAge(60 * 10);
                     sessionIDCookie.setSecure(true);
                     userNameCookie.setSecure(true);
 
                     response.addCookie(userNameCookie);
                     response.addCookie(sessionIDCookie);
-                    response.sendRedirect("admin.jsp");
-
+                    
                     request.getSession().setAttribute("sessionId", sessionID);
+                    request.getRequestDispatcher("WEB-INF/adminProductInfo.jsp").forward(request, response);
                 } else {
                     RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.html");
                     PrintWriter out = response.getWriter();
@@ -91,7 +86,7 @@ public class loginServlet extends HttpServlet {
 
                     response.addCookie(userNameCookie);
                     response.addCookie(sessionIDCookie);
-                    response.sendRedirect("userProductInfo.jsp");
+                    request.getRequestDispatcher("WEB-INF/userProductInfo.jsp").forward(request, response);
 
                     sessionIDCookie.setSecure(true);
                     userNameCookie.setSecure(true);
@@ -107,10 +102,4 @@ public class loginServlet extends HttpServlet {
             }
         }
     }
-
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
 }

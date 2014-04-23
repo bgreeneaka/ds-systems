@@ -13,7 +13,7 @@
     </head>
     <body>
         <h1>Customer Login</h1>
-        <form action="loginServlet" method="get">  
+        <form action="loginServlet" method="post">  
             <table>
                 <tr>
                     <td>User Name</td>

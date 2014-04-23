@@ -15,7 +15,7 @@ public class CustomerServlet extends HttpServlet {
     @EJB
     private CustomerFacadeLocal customerFacade;
 
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //this method checks for a valid session ID
         String sessionid = null;
@@ -57,19 +57,6 @@ public class CustomerServlet extends HttpServlet {
         }
         request.setAttribute("customer", customer);
         request.setAttribute("allCustomers", customerFacade.getAllCustomers());
-        request.getRequestDispatcher("customerInfo.jsp").forward(request, response);
+        request.getRequestDispatcher("WEB-INF/customerInfo.jsp").forward(request, response);
     }
-
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
-
 }

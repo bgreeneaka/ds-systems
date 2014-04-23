@@ -109,6 +109,17 @@
             30
         </session-timeout>
     </session-config>
+    
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>All JSP Pages</web-resource-name>
+            <url-pattern>/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>*</role-name>
+        </auth-constraint>
+    </security-constraint>
+    
     <security-constraint>
         <display-name>adminLogin</display-name>
         <web-resource-collection>
@@ -116,11 +127,13 @@
             <description>adminLogin</description>
             <url-pattern>/adminLogin.jsp</url-pattern>
         </web-resource-collection>
+        
         <user-data-constraint>
             <description/>
             <transport-guarantee>CONFIDENTIAL</transport-guarantee>
         </user-data-constraint>
     </security-constraint>
+    
     <security-constraint>
         <display-name>customerLogin</display-name>
         <web-resource-collection>
@@ -128,6 +141,7 @@
             <description>customerLogin</description>
             <url-pattern>/customerLogin.jsp</url-pattern>
         </web-resource-collection>
+        
         <user-data-constraint>
             <description/>
             <transport-guarantee>CONFIDENTIAL</transport-guarantee>
