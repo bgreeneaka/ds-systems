@@ -1,3 +1,8 @@
+/**
+ * Brian Greene - 11042141 Eoghan Griffin - 10091157 Bartosz Kaminiecki -
+ * 11060204
+ */
+
 package Controller.shop;
 
 import entity.Comment;

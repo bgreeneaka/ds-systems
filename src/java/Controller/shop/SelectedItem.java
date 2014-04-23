@@ -1,3 +1,7 @@
+/**
+ * Brian Greene - 11042141 Eoghan Griffin - 10091157 Bartosz Kaminiecki -
+ * 11060204
+ */
 package Controller.shop;
 
 import java.io.IOException;
@@ -11,10 +15,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import session.shop.ShoppingCartLocal;
 
-/**
- *
- * @author chromodynamics
- */
 public class SelectedItem extends HttpServlet {
 
     @EJB

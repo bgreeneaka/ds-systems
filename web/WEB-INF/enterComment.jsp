@@ -1,7 +1,7 @@
 <%-- 
-    Document   : enterComment
-    Created on : 18-Apr-2014, 00:27:12
-    Author     : chromodynamics
+    Brian Greene - 11042141 
+    Eoghan Griffin - 10091157 
+    Bartosz Kaminiecki - 11060204
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

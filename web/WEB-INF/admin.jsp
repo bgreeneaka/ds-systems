@@ -1,7 +1,7 @@
 <%-- 
-    Document   : admin
-    Created on : 18-Apr-2014, 15:37:39
-    Author     : Admin
+    Brian Greene - 11042141 
+    Eoghan Griffin - 10091157 
+    Bartosz Kaminiecki - 11060204
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -12,10 +12,10 @@
         <title>Admin Page</title>
     </head>
     <body>
-         <%
+        <%
             //this method checks for a valid session ID
             String id = null;
-            
+
             Cookie[] cookies = request.getCookies();    //retrieves cookies
             if (cookies != null) {
                 for (Cookie cookie : cookies) {

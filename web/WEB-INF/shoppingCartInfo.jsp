@@ -1,3 +1,9 @@
+<%-- 
+    Brian Greene - 11042141 
+    Eoghan Griffin - 10091157 
+    Bartosz Kaminiecki - 11060204
+--%>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>

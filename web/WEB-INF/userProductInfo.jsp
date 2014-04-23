@@ -1,7 +1,7 @@
 <%-- 
-    Document   : shop
-    Created on : 18-Apr-2014, 15:23:09
-    Author     : Admin
+    Brian Greene - 11042141 
+    Eoghan Griffin - 10091157 
+    Bartosz Kaminiecki - 11060204
 --%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
