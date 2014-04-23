@@ -25,8 +25,8 @@
                     }
                 }
             }
-            if (id == null) {
-                response.sendRedirect("sessioTimeOut.jsp");    //if session ID cookie is null redirect to session timeout page
+            if (id == null || !id.equals(request.getSession().getAttribute("sessionId"))) {
+                response.sendRedirect("sessionTimeOut.jsp");    //if session ID cookie is null redirect to session timeout page
             }
         %>
 

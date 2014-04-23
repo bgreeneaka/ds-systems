@@ -30,8 +30,23 @@ public class SaveComment extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String user = "";
+        //this method checks for a valid session ID
+        String sessionid = null;
+
         Cookie[] cookies = request.getCookies();    //retrieves cookies
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("id")) {
+                    sessionid = cookie.getValue();         //retrieves session ID cookie
+                }
+            }
+        }
+        if (sessionid == null || !sessionid.equals(request.getSession().getAttribute("sessionId"))) {
+            request.getRequestDispatcher("sessionTimeOut.jsp").forward(request, response);
+        }
+
+        String user = "";
+        cookies = request.getCookies();    //retrieves cookies
         if (cookies != null) {
             for (Cookie cookie : cookies) {
                 if (cookie.getName().equals("user")) {

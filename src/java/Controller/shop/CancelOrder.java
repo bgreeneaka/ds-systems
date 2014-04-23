@@ -23,6 +23,21 @@ public class CancelOrder extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        //this method checks for a valid session ID
+        String id = null;
+
+        Cookie[] cookies = request.getCookies();    //retrieves cookies
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("id")) {
+                    id = cookie.getValue();         //retrieves session ID cookie
+                }
+            }
+        }
+        if (id == null || !id.equals(request.getSession().getAttribute("sessionId"))) {
+            request.getRequestDispatcher("sessionTimeOut.jsp").forward(request, response);
+        }
+
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
@@ -43,12 +58,10 @@ public class CancelOrder extends HttpServlet {
                 out.println("</html>");
 
                 String user = "";
-                Cookie[] cookies = request.getCookies();    //retrieves cookies
-                if (cookies != null) {
-                    for (Cookie cookie : cookies) {
-                        if (cookie.getName().equals("user")) {
-                            user = cookie.getValue();
-                        }
+
+                for (Cookie cookie : cookies) {
+                    if (cookie.getName().equals("user")) {
+                        user = cookie.getValue();
                     }
                 }
 

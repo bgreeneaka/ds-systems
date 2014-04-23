@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -29,6 +30,20 @@ public class ViewShoppingCart extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        //this method checks for a valid session ID
+        String id = null;
+
+        Cookie[] cookies = request.getCookies();    //retrieves cookies
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("id")) {
+                    id = cookie.getValue();         //retrieves session ID cookie
+                }
+            }
+        }
+        if (id == null || !id.equals(request.getSession().getAttribute("sessionId"))) {
+            request.getRequestDispatcher("sessionTimeOut.jsp").forward(request, response);
+        }
 
         ShoppingCartLocal shoppingCart = (ShoppingCartLocal) request.getSession().getAttribute("shoppingCart");
 

@@ -50,20 +50,22 @@ public class loginServlet extends HttpServlet {
 
                     Cookie userNameCookie = new Cookie("user", userName);
                     Cookie sessionIDCookie = new Cookie("id", sessionID);
-                    
+
                     Cookie encodedName = new Cookie("safeName", safeUserName);
                     encodedName.setMaxAge(60 * 10);
                     encodedName.setSecure(true);
                     response.addCookie(encodedName);
-                    
+
                     userNameCookie.setMaxAge(60 * 10);
                     sessionIDCookie.setMaxAge(60 * 10);
                     sessionIDCookie.setSecure(true);
                     userNameCookie.setSecure(true);
-                    
+
                     response.addCookie(userNameCookie);
                     response.addCookie(sessionIDCookie);
                     response.sendRedirect("admin.jsp");
+
+                    request.getSession().setAttribute("sessionId", sessionID);
                 } else {
                     RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.html");
                     PrintWriter out = response.getWriter();
@@ -78,21 +80,23 @@ public class loginServlet extends HttpServlet {
                 if (customer.getUsername().equals(ESAPI.encoder().decodeForHTML(userName)) && customer.getPassword().equals(password)) {
                     Cookie userNameCookie = new Cookie("user", userName);
                     Cookie sessionIDCookie = new Cookie("id", sessionID);
-                    
+
                     Cookie encodedName = new Cookie("safeName", safeUserName);
                     encodedName.setMaxAge(60 * 10);
                     encodedName.setSecure(true);
                     response.addCookie(encodedName);
-                    
+
                     userNameCookie.setMaxAge(60 * 10);
                     sessionIDCookie.setMaxAge(60 * 10);
-                    
+
                     response.addCookie(userNameCookie);
                     response.addCookie(sessionIDCookie);
                     response.sendRedirect("userProductInfo.jsp");
-                    
+
                     sessionIDCookie.setSecure(true);
                     userNameCookie.setSecure(true);
+
+                    request.getSession().setAttribute("sessionId", sessionID);
                 } else {
                     RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.html");
                     PrintWriter out = response.getWriter();

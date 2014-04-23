@@ -12,8 +12,23 @@ public class logoutServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       
-        Cookie[] cookies = request.getCookies();
+
+        //this method checks for a valid session ID
+        String sessionid = null;
+
+        Cookie[] cookies = request.getCookies();    //retrieves cookies
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("id")) {
+                    sessionid = cookie.getValue();         //retrieves session ID cookie
+                }
+            }
+        }
+        if (sessionid == null || !sessionid.equals(request.getSession().getAttribute("sessionId"))) {
+            request.getRequestDispatcher("sessionTimeOut.jsp").forward(request, response);
+        }
+
+        cookies = request.getCookies();
         if (cookies != null) {
             for (Cookie cookie : cookies) {
                 cookie.setValue(null);
@@ -21,10 +36,6 @@ public class logoutServlet extends HttpServlet {
                 response.addCookie(cookie);
             }
         }
-//        RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.html");
-//
-//        rd.include(request, response);
         response.sendRedirect("index.html");
     }
-
 }
